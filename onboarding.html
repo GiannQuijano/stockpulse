@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StockPulse — Getting Started Guide</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        :root {
+            --bg: #0a0a0a;
+            --surface: #111113;
+            --surface-2: #1a1a1e;
+            --border: rgba(255,255,255,0.08);
+            --border-hover: rgba(255,255,255,0.15);
+            --text: #ffffff;
+            --text-2: rgba(255,255,255,0.6);
+            --text-3: rgba(255,255,255,0.35);
+            --emerald: #34d399;
+            --emerald-dim: rgba(52,211,153,0.1);
+            --emerald-border: rgba(52,211,153,0.2);
+            --amber: #fbbf24;
+            --red: #f87171;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.6;
+        }
+
+        /* ── Header ── */
+        .header {
+            background: rgba(10,10,10,0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 24px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            max-width: 100%;
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo {
+            color: var(--emerald);
+        }
+
+        .header-brand h1 {
+            font-size: 17px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .header-tag {
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--text-3);
+            background: rgba(255,255,255,0.05);
+            padding: 3px 10px;
+            border-radius: 100px;
+            margin-left: 4px;
+        }
+
+        .header-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 9px 18px;
+            background: var(--emerald);
+            color: #000;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .header-cta:hover { background: #6ee7b7; }
+
+        /* ── Hero ── */
+        .hero {
+            max-width: 680px;
+            margin: 0 auto;
+            padding: 100px 24px 72px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(52,211,153,0.06), transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: clamp(32px, 5vw, 44px);
+            font-weight: 800;
+            letter-spacing: -1px;
+            line-height: 1.15;
+            margin-bottom: 16px;
+            position: relative;
+        }
+
+        .hero .gradient {
+            background: linear-gradient(135deg, #34d399, #5eead4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 16px;
+            color: var(--text-2);
+            max-width: 480px;
+            margin: 0 auto 28px;
+            position: relative;
+        }
+
+        .time-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            background: var(--emerald-dim);
+            border: 1px solid var(--emerald-border);
+            border-radius: 100px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--emerald);
+            position: relative;
+        }
+
+        /* ── Steps ── */
+        .steps {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 0 24px 100px;
+        }
+
+        .step {
+            margin-bottom: 72px;
+        }
+
+        .step-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .step-number {
+            width: 36px;
+            height: 36px;
+            background: var(--emerald);
+            color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 800;
+            flex-shrink: 0;
+        }
+
+        .step-header h2 {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        .step-header p {
+            font-size: 14px;
+            color: var(--text-3);
+            margin-top: 4px;
+        }
+
+        .step-body {
+            margin-left: 52px;
+        }
+
+        .step-instruction {
+            font-size: 14px;
+            color: var(--text-2);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .step-instruction strong {
+            color: var(--text);
+        }
+
+        .step-instruction a {
+            color: var(--emerald);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .step-instruction a:hover { text-decoration: underline; }
+
+        /* ── Screenshot Mockup ── */
+        .mockup {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.3);
+        }
+
+        .mockup-bar {
+            background: var(--surface-2);
+            border-bottom: 1px solid var(--border);
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mockup-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+        }
+
+        .mockup-dot.red { background: #f87171; }
+        .mockup-dot.yellow { background: #fbbf24; }
+        .mockup-dot.green { background: #34d399; }
+
+        .mockup-url {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 4px 12px;
+            font-size: 11px;
+            color: var(--text-3);
+            font-family: 'JetBrains Mono', monospace;
+            margin-left: 8px;
+        }
+
+        /* ── Signup Mockup ── */
+        .mock-auth {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 24px;
+            background: #f8fafc;
+            min-height: 380px;
+        }
+
+        .mock-auth-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 32px;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .mock-auth-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 24px;
+            color: #0f172a;
+        }
+
+        .mock-auth-logo-icon {
+            color: #34d399;
+        }
+
+        .mock-auth-logo span {
+            font-size: 16px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .mock-auth-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 4px;
+            color: #0f172a;
+        }
+
+        .mock-auth-card .sub {
+            font-size: 13px;
+            color: #94a3b8;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .mock-field {
+            margin-bottom: 16px;
+        }
+
+        .mock-field label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 6px;
+            color: #0f172a;
+        }
+
+        .mock-field .input {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #94a3b8;
+            background: #fff;
+        }
+
+        .mock-field .input.filled {
+            color: #0f172a;
+        }
+
+        .mock-btn {
+            width: 100%;
+            padding: 10px;
+            background: #0f172a;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 8px;
+        }
+
+        .mock-link {
+            text-align: center;
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 16px;
+        }
+
+        .mock-link a {
+            color: #3b82f6;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* ── Dashboard Mockup ── */
+        .mock-dashboard {
+            display: flex;
+            min-height: 420px;
+        }
+
+        .mock-sidebar {
+            width: 200px;
+            background: #fff;
+            border-right: 1px solid #e2e8f0;
+            padding: 16px 0;
+            flex-shrink: 0;
+        }
+
+        .mock-sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 16px 16px;
+            border-bottom: 1px solid #f1f5f9;
+            margin-bottom: 12px;
+            color: #0f172a;
+        }
+
+        .mock-sidebar-logo-icon { color: #34d399; }
+
+        .mock-sidebar-logo span {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .mock-nav-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #64748b;
+            margin: 2px 8px;
+            border-radius: 6px;
+        }
+
+        .mock-nav-item.active {
+            background: #eff6ff;
+            color: #3b82f6;
+            font-weight: 600;
+        }
+
+        .mock-nav-icon {
+            width: 16px;
+            height: 16px;
+            border-radius: 3px;
+            background: currentColor;
+            opacity: 0.25;
+        }
+
+        .mock-main {
+            flex: 1;
+            background: #f8fafc;
+            padding: 20px 24px;
+        }
+
+        .mock-topbar {
+            margin-bottom: 24px;
+        }
+
+        .mock-topbar h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        .mock-topbar p {
+            font-size: 12px;
+            color: #94a3b8;
+        }
+
+        .mock-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .mock-stat-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 14px;
+        }
+
+        .mock-stat-card .val {
+            font-size: 22px;
+            font-weight: 700;
+            color: #0f172a;
+        }
+
+        .mock-stat-card .val.blue { color: #3b82f6; }
+        .mock-stat-card .val.gray { color: #64748b; }
+        .mock-stat-card .val.amber { color: #d97706; }
+        .mock-stat-card .val.red { color: #dc2626; }
+        .mock-stat-card .val.green { color: #16a34a; }
+
+        .mock-stat-card .lbl {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: 2px;
+        }
+
+        .mock-brand-cards {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .mock-brand-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .mock-brand-card h4 {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #0f172a;
+        }
+
+        .platform-tag {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #f1f5f9;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .sku-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: #94a3b8;
+            padding: 3px 0;
+        }
+
+        .sku-row .ct { font-weight: 600; }
+        .sku-row .ct.green { color: #16a34a; }
+        .sku-row .ct.amber { color: #d97706; }
+        .sku-row .ct.red { color: #dc2626; }
+
+        /* ── Add Brand Mockup ── */
+        .mock-form-area {
+            flex: 1;
+            background: #f8fafc;
+            padding: 24px;
+        }
+
+        .mock-steps-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            margin-bottom: 28px;
+        }
+
+        .mock-step-dot {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            background: #e2e8f0;
+            color: #94a3b8;
+        }
+
+        .mock-step-dot.active { background: #0f172a; color: #fff; }
+        .mock-step-dot.done { background: #16a34a; color: #fff; }
+
+        .mock-step-line { width: 60px; height: 2px; background: #e2e8f0; }
+        .mock-step-line.done { background: #16a34a; }
+
+        .mock-form-card {
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 28px;
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .mock-form-card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: #0f172a;
+        }
+
+        .mock-form-card .sub {
+            font-size: 13px;
+            color: #94a3b8;
+            margin-bottom: 24px;
+        }
+
+        .mock-select {
+            width: 100%;
+            padding: 9px 12px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #0f172a;
+            background: #fff;
+        }
+
+        .mock-form-btns {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .mock-form-btn {
+            padding: 9px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid #e2e8f0;
+            background: #fff;
+            color: #64748b;
+        }
+
+        .mock-form-btn.primary {
+            background: #0f172a;
+            color: #fff;
+            border-color: #0f172a;
+        }
+
+        /* ── Product Table ── */
+        .mock-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+        }
+
+        .mock-table thead th {
+            text-align: left;
+            padding: 10px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .mock-table tbody td {
+            padding: 12px;
+            border-bottom: 1px solid #f1f5f9;
+            color: #475569;
+        }
+
+        .mock-table .product-name { font-weight: 600; color: #0f172a; }
+
+        .mock-table .sku {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: #94a3b8;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 100px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .status-badge.healthy { background: #f0fdf4; color: #16a34a; }
+        .status-badge.warning { background: #fffbeb; color: #d97706; }
+        .status-badge.critical { background: #fef2f2; color: #dc2626; }
+
+        /* ── Callout ── */
+        .callout {
+            background: var(--emerald-dim);
+            border: 1px solid var(--emerald-border);
+            border-radius: 8px;
+            padding: 14px 18px;
+            font-size: 13px;
+            color: var(--emerald);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .callout.blue {
+            background: rgba(59,130,246,0.08);
+            border-color: rgba(59,130,246,0.2);
+            color: #93c5fd;
+        }
+
+        .callout strong { color: inherit; }
+
+        .callout-icon {
+            font-size: 16px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        /* ── Annotation ── */
+        .annotation {
+            margin-top: 14px;
+        }
+
+        .annotation-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(251,191,36,0.1);
+            border: 1px solid rgba(251,191,36,0.2);
+            border-radius: 6px;
+            padding: 6px 14px;
+            font-size: 12px;
+            font-weight: 600;
+            color: #fbbf24;
+        }
+
+        /* ── Summary cards ── */
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+            margin-top: 20px;
+        }
+
+        .summary-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 24px;
+        }
+
+        .summary-card .icon {
+            font-size: 24px;
+            margin-bottom: 12px;
+        }
+
+        .summary-card h4 {
+            font-size: 14px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .summary-card p {
+            font-size: 12px;
+            color: var(--text-3);
+            line-height: 1.6;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            text-align: center;
+            padding: 48px 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer p {
+            font-size: 13px;
+            color: var(--text-3);
+            margin-bottom: 16px;
+        }
+
+        .footer-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: var(--emerald);
+            color: #000;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+
+        .footer-cta:hover { background: #6ee7b7; }
+
+        /* ── Responsive ── */
+        @media (max-width: 700px) {
+            .mock-sidebar { display: none; }
+            .mock-stats { grid-template-columns: repeat(2, 1fr); }
+            .mock-brand-cards { grid-template-columns: 1fr; }
+            .hero { padding: 72px 20px 48px; }
+            .step-body { margin-left: 0; margin-top: 16px; }
+            .step-header { flex-direction: column; }
+            .summary-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ── Reveal ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ── Header ── -->
+    <div class="header">
+        <div class="header-brand">
+            <div class="header-logo">
+                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <h1>StockPulse</h1>
+            <span class="header-tag">Getting Started</span>
+        </div>
+        <a href="https://stockpulse-xi-six.vercel.app/signup" class="header-cta">
+            Create Account
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </div>
+
+    <!-- ── Hero ── -->
+    <div class="hero reveal">
+        <h1>Get Up and Running<br><span class="gradient">in 3 Minutes</span></h1>
+        <p>This guide walks you through creating your account, connecting your first brand, and understanding your inventory dashboard.</p>
+        <div class="time-badge">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Estimated setup time: 3 minutes
+        </div>
+    </div>
+
+    <!-- ── Steps ── -->
+    <div class="steps">
+
+        <!-- STEP 1: Create Account -->
+        <div class="step reveal">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <div>
+                    <h2>Create Your Account</h2>
+                    <p>Sign up with your email — takes 15 seconds</p>
+                </div>
+            </div>
+            <div class="step-body">
+                <p class="step-instruction">
+                    Go to <a href="https://stockpulse-xi-six.vercel.app/signup" target="_blank">stockpulse-xi-six.vercel.app/signup</a> and fill in your email and password. You'll land in your dashboard immediately.
+                </p>
+
+                <div class="mockup">
+                    <div class="mockup-bar">
+                        <div class="mockup-dot red"></div>
+                        <div class="mockup-dot yellow"></div>
+                        <div class="mockup-dot green"></div>
+                        <div class="mockup-url">stockpulse-xi-six.vercel.app/signup</div>
+                    </div>
+                    <div class="mockup-body">
+                        <div class="mock-auth">
+                            <div class="mock-auth-card">
+                                <div class="mock-auth-logo">
+                                    <div class="mock-auth-logo-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                    </div>
+                                    <span>StockPulse</span>
+                                </div>
+                                <h3>Create your account</h3>
+                                <p class="sub">Start tracking inventory across your brands</p>
+                                <div class="mock-field">
+                                    <label>Email</label>
+                                    <div class="input filled">you@youragency.com</div>
+                                </div>
+                                <div class="mock-field">
+                                    <label>Password</label>
+                                    <div class="input">Create a password</div>
+                                </div>
+                                <div class="mock-field">
+                                    <label>Confirm Password</label>
+                                    <div class="input">Confirm your password</div>
+                                </div>
+                                <div class="mock-btn">Create account</div>
+                                <div class="mock-link">Already have an account? <a href="#">Sign in</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout">
+                    <span class="callout-icon">&#x2714;</span>
+                    <span>Password must be at least 6 characters. You'll be logged in automatically after signing up.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2: Add Brand -->
+        <div class="step reveal">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <div>
+                    <h2>Add Your First Brand</h2>
+                    <p>Connect a client's store in 3 quick steps</p>
+                </div>
+            </div>
+            <div class="step-body">
+                <p class="step-instruction">
+                    After signing up, you'll land on an empty dashboard. Click <strong>"Add Brand"</strong> to start the setup wizard.
+                </p>
+
+                <div class="mockup">
+                    <div class="mockup-bar">
+                        <div class="mockup-dot red"></div>
+                        <div class="mockup-dot yellow"></div>
+                        <div class="mockup-dot green"></div>
+                        <div class="mockup-url">stockpulse-xi-six.vercel.app/brands/new</div>
+                    </div>
+                    <div class="mockup-body">
+                        <div class="mock-dashboard">
+                            <div class="mock-sidebar">
+                                <div class="mock-sidebar-logo">
+                                    <div class="mock-sidebar-logo-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                    </div>
+                                    <span>StockPulse</span>
+                                </div>
+                                <div class="mock-nav-item"><div class="mock-nav-icon"></div> Dashboard</div>
+                                <div class="mock-nav-item active"><div class="mock-nav-icon"></div> Brands</div>
+                                <div class="mock-nav-item"><div class="mock-nav-icon"></div> Alerts</div>
+                                <div class="mock-nav-item"><div class="mock-nav-icon"></div> Settings</div>
+                            </div>
+                            <div class="mock-form-area">
+                                <div class="mock-topbar" style="margin-bottom:20px;">
+                                    <h3>Add New Brand</h3>
+                                    <p style="font-size:12px;color:#94a3b8;">Connect a client brand to start tracking inventory</p>
+                                </div>
+                                <div class="mock-steps-indicator">
+                                    <div class="mock-step-dot active">1</div>
+                                    <div class="mock-step-line"></div>
+                                    <div class="mock-step-dot">2</div>
+                                    <div class="mock-step-line"></div>
+                                    <div class="mock-step-dot">3</div>
+                                </div>
+                                <div class="mock-form-card">
+                                    <h3>Brand Information</h3>
+                                    <p class="sub">Basic information about the client brand</p>
+                                    <div class="mock-field">
+                                        <label>Brand Name</label>
+                                        <div class="input filled">Acme Fashion</div>
+                                    </div>
+                                    <div class="mock-field">
+                                        <label>Platform</label>
+                                        <div class="mock-select">Shopify</div>
+                                    </div>
+                                    <div class="mock-field">
+                                        <label>Store URL</label>
+                                        <div class="input filled">https://acme-fashion.myshopify.com</div>
+                                    </div>
+                                    <div class="mock-form-btns">
+                                        <div class="mock-form-btn primary">Next &rarr;</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 24px;">
+                    <p class="step-instruction" style="margin-bottom:12px;"><strong>Step 1 — Brand Info:</strong> Enter the brand name, select the platform (Shopify, WooCommerce, CSV, or Custom), and the store URL.</p>
+                    <p class="step-instruction" style="margin-bottom:12px;"><strong>Step 2 — Credentials:</strong> Enter the API credentials for the platform. For Shopify, you'll need an Access Token. For WooCommerce, a Consumer Key and Secret.</p>
+                    <p class="step-instruction"><strong>Step 3 — Alerts:</strong> Optionally add a Slack webhook URL, alert email, and set the default alert threshold (default: 7 days of stock remaining).</p>
+                </div>
+
+                <div class="callout blue">
+                    <span class="callout-icon">&#x1f4a1;</span>
+                    <span><strong>Don't have API keys yet?</strong> Choose "CSV Upload Only" as the platform. You can upload inventory data manually via CSV and connect the API later.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 3: Dashboard -->
+        <div class="step reveal">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <div>
+                    <h2>Your Dashboard</h2>
+                    <p>See all your brands and inventory health at a glance</p>
+                </div>
+            </div>
+            <div class="step-body">
+                <p class="step-instruction">
+                    Once you've added a brand and synced inventory, your dashboard shows a real-time overview of every brand's stock health.
+                </p>
+
+                <div class="mockup">
+                    <div class="mockup-bar">
+                        <div class="mockup-dot red"></div>
+                        <div class="mockup-dot yellow"></div>
+                        <div class="mockup-dot green"></div>
+                        <div class="mockup-url">stockpulse-xi-six.vercel.app/dashboard</div>
+                    </div>
+                    <div class="mockup-body">
+                        <div class="mock-dashboard">
+                            <div class="mock-sidebar">
+                                <div class="mock-sidebar-logo">
+                                    <div class="mock-sidebar-logo-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                    </div>
+                                    <span>StockPulse</span>
+                                </div>
+                                <div class="mock-nav-item active"><div class="mock-nav-icon"></div> Dashboard</div>
+                                <div class="mock-nav-item"><div class="mock-nav-icon"></div> Brands</div>
+                                <div class="mock-nav-item"><div class="mock-nav-icon"></div> Alerts</div>
+                                <div class="mock-nav-item"><div class="mock-nav-icon"></div> Settings</div>
+                            </div>
+                            <div class="mock-main">
+                                <div class="mock-topbar">
+                                    <h3>Dashboard</h3>
+                                    <p>Agency inventory overview</p>
+                                </div>
+                                <div class="mock-stats">
+                                    <div class="mock-stat-card">
+                                        <div class="val blue">5</div>
+                                        <div class="lbl">Active Brands</div>
+                                    </div>
+                                    <div class="mock-stat-card">
+                                        <div class="val gray">847</div>
+                                        <div class="lbl">Total SKUs</div>
+                                    </div>
+                                    <div class="mock-stat-card">
+                                        <div class="val amber">12</div>
+                                        <div class="lbl">Warning</div>
+                                    </div>
+                                    <div class="mock-stat-card">
+                                        <div class="val red">3</div>
+                                        <div class="lbl">Critical</div>
+                                    </div>
+                                </div>
+                                <div class="mock-brand-cards">
+                                    <div class="mock-brand-card">
+                                        <h4>Acme Fashion</h4>
+                                        <div class="platform-tag">Shopify</div>
+                                        <div class="sku-row"><span>Total SKUs</span><span class="ct">234</span></div>
+                                        <div class="sku-row"><span>Healthy</span><span class="ct green">198</span></div>
+                                        <div class="sku-row"><span>Warning</span><span class="ct amber">5</span></div>
+                                        <div class="sku-row"><span>Critical</span><span class="ct red">1</span></div>
+                                    </div>
+                                    <div class="mock-brand-card">
+                                        <h4>Coastal Surf Co</h4>
+                                        <div class="platform-tag">WooCommerce</div>
+                                        <div class="sku-row"><span>Total SKUs</span><span class="ct">156</span></div>
+                                        <div class="sku-row"><span>Healthy</span><span class="ct green">140</span></div>
+                                        <div class="sku-row"><span>Warning</span><span class="ct amber">4</span></div>
+                                        <div class="sku-row"><span>Critical</span><span class="ct red">2</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="annotation">
+                    <span class="annotation-label">&#x1f449; Click any brand card to see its full product inventory</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 4: Products & Alerts -->
+        <div class="step reveal">
+            <div class="step-header">
+                <div class="step-number">4</div>
+                <div>
+                    <h2>Monitor Products & Alerts</h2>
+                    <p>Track individual SKUs and get notified before stockouts</p>
+                </div>
+            </div>
+            <div class="step-body">
+                <p class="step-instruction">
+                    Click into any brand to see every product with stock levels, sell-through velocity, days remaining, and status. Products approaching stockout are flagged automatically.
+                </p>
+
+                <div class="mockup">
+                    <div class="mockup-bar">
+                        <div class="mockup-dot red"></div>
+                        <div class="mockup-dot yellow"></div>
+                        <div class="mockup-dot green"></div>
+                        <div class="mockup-url">stockpulse-xi-six.vercel.app/brands/acme-fashion</div>
+                    </div>
+                    <div class="mockup-body">
+                        <div class="mock-dashboard">
+                            <div class="mock-sidebar">
+                                <div class="mock-sidebar-logo">
+                                    <div class="mock-sidebar-logo-icon">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                                    </div>
+                                    <span>StockPulse</span>
+                                </div>
+                                <div class="mock-nav-item"><div class="mock-nav-icon"></div> Dashboard</div>
+                                <div class="mock-nav-item active"><div class="mock-nav-icon"></div> Brands</div>
+                                <div class="mock-nav-item"><div class="mock-nav-icon"></div> Alerts</div>
+                                <div class="mock-nav-item"><div class="mock-nav-icon"></div> Settings</div>
+                            </div>
+                            <div class="mock-main">
+                                <div class="mock-topbar" style="display:flex;justify-content:space-between;align-items:flex-start;">
+                                    <div>
+                                        <h3>Acme Fashion</h3>
+                                        <p>Shopify integration</p>
+                                    </div>
+                                    <div style="display:flex;gap:8px;">
+                                        <div class="mock-form-btn" style="font-size:11px;padding:6px 12px;">Upload CSV</div>
+                                        <div class="mock-form-btn primary" style="font-size:11px;padding:6px 12px;">Sync Now</div>
+                                    </div>
+                                </div>
+
+                                <div class="mock-stats" style="grid-template-columns:repeat(5,1fr);margin-bottom:20px;">
+                                    <div class="mock-stat-card"><div class="val gray" style="font-size:18px;">234</div><div class="lbl">Total SKUs</div></div>
+                                    <div class="mock-stat-card"><div class="val green" style="font-size:18px;">198</div><div class="lbl">Healthy</div></div>
+                                    <div class="mock-stat-card"><div class="val amber" style="font-size:18px;">5</div><div class="lbl">Warning</div></div>
+                                    <div class="mock-stat-card"><div class="val red" style="font-size:18px;">1</div><div class="lbl">Critical</div></div>
+                                    <div class="mock-stat-card"><div class="val green" style="font-size:18px;">96%</div><div class="lbl">Health Score</div></div>
+                                </div>
+
+                                <div style="background:#fff;border:1px solid #e2e8f0;border-radius:8px;overflow:hidden;">
+                                    <div style="padding:14px 16px;border-bottom:1px solid #f1f5f9;font-size:14px;font-weight:600;color:#0f172a;">Products</div>
+                                    <table class="mock-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Product</th>
+                                                <th>SKU</th>
+                                                <th style="text-align:right;">Stock</th>
+                                                <th style="text-align:right;">Velocity</th>
+                                                <th style="text-align:right;">Days Left</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="product-name">Classic Tee — Black / M</td>
+                                                <td class="sku">CT-BLK-M</td>
+                                                <td style="text-align:right;">342</td>
+                                                <td style="text-align:right;">4.2/day</td>
+                                                <td style="text-align:right;">81 days</td>
+                                                <td><span class="status-badge healthy">Healthy</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="product-name">Linen Shorts — Sand / L</td>
+                                                <td class="sku">LS-SND-L</td>
+                                                <td style="text-align:right;">58</td>
+                                                <td style="text-align:right;">6.1/day</td>
+                                                <td style="text-align:right;">9 days</td>
+                                                <td><span class="status-badge warning">Warning</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="product-name">Resort Hoodie — Navy / S</td>
+                                                <td class="sku">RH-NVY-S</td>
+                                                <td style="text-align:right;">12</td>
+                                                <td style="text-align:right;">3.8/day</td>
+                                                <td style="text-align:right;">3 days</td>
+                                                <td><span class="status-badge critical">Critical</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="product-name">Cargo Pants — Olive / XL</td>
+                                                <td class="sku">CP-OLV-XL</td>
+                                                <td style="text-align:right;">215</td>
+                                                <td style="text-align:right;">2.1/day</td>
+                                                <td style="text-align:right;">102 days</td>
+                                                <td><span class="status-badge healthy">Healthy</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="callout blue">
+                    <span class="callout-icon">&#x1f514;</span>
+                    <span><strong>Alerts are automatic.</strong> When a product crosses your threshold (default: 7 days of stock remaining), you'll get notified via Slack, email, or the Alerts tab.</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 5: You're Set -->
+        <div class="step reveal">
+            <div class="step-header">
+                <div class="step-number">5</div>
+                <div>
+                    <h2>You're All Set</h2>
+                    <p>Start tracking inventory and never miss a stockout</p>
+                </div>
+            </div>
+            <div class="step-body">
+                <p class="step-instruction">That's it. Here's what happens from here:</p>
+
+                <div class="summary-grid">
+                    <div class="summary-card">
+                        <div class="icon">&#x1f504;</div>
+                        <h4>Auto-Syncing</h4>
+                        <p>Inventory syncs automatically every 4 hours. No manual work needed.</p>
+                    </div>
+                    <div class="summary-card">
+                        <div class="icon">&#x26a0;&#xfe0f;</div>
+                        <h4>Smart Alerts</h4>
+                        <p>Get notified via Slack or email before a product runs out — not after.</p>
+                    </div>
+                    <div class="summary-card">
+                        <div class="icon">&#x1f4c8;</div>
+                        <h4>30-Day Trends</h4>
+                        <p>Click any product to see a 30-day inventory chart and sell-through velocity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ── Footer ── -->
+    <div class="footer">
+        <p>Questions? Reach out to your account manager anytime.</p>
+        <a href="https://stockpulse-xi-six.vercel.app/signup" class="footer-cta">
+            Create Your Account
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+    </div>
+
+    <script>
+        const revealEls = document.querySelectorAll('.reveal');
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+        revealEls.forEach(el => obs.observe(el));
+    </script>
+</body>
+</html>

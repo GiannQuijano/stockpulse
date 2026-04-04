@@ -1,0 +1,16 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/sync-inventory",
+      "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/cron/check-alerts",
+      "schedule": "0 12 * * *"
+    },
+    {
+      "path": "/api/cron/cleanup-snapshots",
+      "schedule": "0 3 * * 0"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+'use client'
+
+import { Bell } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+
+interface TopbarProps {
+  title: string
+  description?: string
+  action?: React.ReactNode
+}
+
+export function Topbar({ title, description, action }: TopbarProps) {
+  return (
+    <div className="flex h-16 items-center justify-between border-b bg-white px-6">
+      <div>
+        <h1 className="text-lg font-semibold">{title}</h1>
+        {description && (
+          <p className="text-sm text-muted-foreground">{description}</p>
+        )}
+      </div>
+      <div className="flex items-center gap-3">
+        {action}
+        <Button variant="ghost" size="icon">
+          <Bell className="h-4 w-4" />
+        </Button>
+      </div>
+    </div>
+  )
+}
